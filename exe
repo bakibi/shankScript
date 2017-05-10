@@ -1,0 +1,4 @@
+clear
+gcc -o prog sks.c
+./prog
+rm prog
