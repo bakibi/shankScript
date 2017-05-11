@@ -12,8 +12,8 @@ typedef struct Variable
 
 /*
     Pour le type des variabes :
-        0   type var :
-        1   type str 
+        0   type var :(int ou float)
+        1   type str (chaine de caractere)
         
 
 */
