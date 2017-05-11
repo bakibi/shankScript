@@ -12,9 +12,9 @@
 int estMotCle(char *chaine)
 {
     // les mots clee disponibles
-    char m[][20] = {"var","str","while","if","else","function","class","for","return"}; 
-    int taille  = 9;
-    for(int i = 0;i<9;i++)
+    char m[][20] = {"var","str","while","if","else","function","class","for","return","new"}; 
+    int taille  = 10;
+    for(int i = 0;i<taille;i++)
         if(strcmp(m[i],chaine) == 0)
             return 1;//trouve
     return 0;//pas trouve
