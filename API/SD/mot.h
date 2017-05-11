@@ -7,8 +7,8 @@
 */
 typedef struct mot
 {
-    char *contenu;
-    int type ;
+    char *contenu;//ce qu il y a dans le mot
+    int type ;//    le type du mot
 }mot;
 
 /*

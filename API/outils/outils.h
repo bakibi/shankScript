@@ -1,3 +1,6 @@
 
-#include "readfromfile.h"
-#include "copytoFile.h"
+#include "readfromfile.h"       //cette fonction lit le contenu d un fichier et le met dans une chaine de cara
+#include "copytoFile.h"         // cette fonctio prend le contenu d une chaine de cara et le met dans un fichier
+#include "estmotcle.h"          //  cette fonction verifie si un mot est un mot clee
+#include "estnombre.h"          //cette fonction verirife si une chaine est un nombre
+#include "estmotvalide.h"       //cette fonction verifie di un mot est valide

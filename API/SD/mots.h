@@ -8,7 +8,7 @@ La strucutre de donnees "mots" :
 
 typedef struct mots
 {
-    mot *contenu;
-    struct mots *svt;
+    mot *contenu;//le mot en personne
+    struct mots *svt;//le mot suivant sinon NULL
 }mots ;
 
