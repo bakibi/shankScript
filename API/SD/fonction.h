@@ -11,8 +11,10 @@ typedef struct Fonction
     int typeRetour; //type de retour ça dependre des  type de varialbe qu on a
     char *nom;//le nom de la fonction
     int nbrParametres;//nom de parametre
-    char *header;//le header de la fonction
+    LesVariables *contenuV; //les variable qui sont dans le header
+    struct LesClasses *contenuC;//en parametre classes
     char *contenu;//et le contenu de la fonction
+    char *ContenuR; // le contenu que la fonction va retourner
 }Fonction;
 
 /*
