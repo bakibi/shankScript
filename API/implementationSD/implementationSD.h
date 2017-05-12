@@ -29,8 +29,11 @@ int LesVariables_variableEstStr(LesVariables *lv,char *nom);
 Fonction *new_Fonction(char *nom,int nbrParametre,LesVariables *lv, LesInstanceClasses *lic,char *contenu);
 int Fonction_CompareNom(Fonction *fct,char *nom);
 int Fonction_compare(Fonction *fct,char *nom,int nbr);
-
-
+//          lesfonctions.h
+LesFonctions *new_LesFonctions();
+LesFonctions *LesFonctions_ajouter(LesFonctions *lf,char *nom,int nbrParametre,LesVariables *lv, LesInstanceClasses *lic,char *contenu);
+int LesFonctions_chercherNom(LesFonctions *lf,char *nom);
+int LesFonctions_chercher(LesFonctions *lf,char *nom,int nbr);
 
 
 
@@ -40,4 +43,5 @@ int Fonction_compare(Fonction *fct,char *nom,int nbr);
 #include "variable.h"   //une varialbe
 #include "lesvariables.h" // les variable
 #include "fonction.h" //  une fonction
+#include "lesfonction.h" // liste des fonction 
 #include "commande.h"
