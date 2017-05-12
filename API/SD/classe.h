@@ -10,5 +10,5 @@ typedef struct Classe
 	LesFonctions *contenuF; //l ensembble de tous les fonction
 	LesFonctions *constructeurs; // les constructeur de cette classe
 	LesVariables *contenuV;//l ensemble de tous les variables
-   struct  instanceClasse *contenuC;//l ensemble de classes 
+   struct  LesinstanceClasses *contenuC;//l ensemble de classes 
 }Classe;

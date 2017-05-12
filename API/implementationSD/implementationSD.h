@@ -25,8 +25,10 @@ char *LesVariables_contenu(LesVariables *lv,char *nom);
 LesVariables *LesVariables_modifierVariable(LesVariables *lv,char *nom,char *contenu);
 int LesVariables_variableEstVar(LesVariables *lv,char *nom);
 int LesVariables_variableEstStr(LesVariables *lv,char *nom);
-
-
+//          fonction.h
+Fonction *new_Fonction(char *nom,int nbrParametre,LesVariables *lv, LesInstanceClasses *lic,char *contenu);
+int Fonction_CompareNom(Fonction *fct,char *nom);
+int Fonction_compare(Fonction *fct,char *nom,int nbr);
 
 
 
@@ -37,4 +39,5 @@ int LesVariables_variableEstStr(LesVariables *lv,char *nom);
 #include "pile.h" // une pile de type ElementPile
 #include "variable.h"   //une varialbe
 #include "lesvariables.h" // les variable
+#include "fonction.h" //  une fonction
 #include "commande.h"

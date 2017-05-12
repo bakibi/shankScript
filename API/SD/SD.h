@@ -9,6 +9,7 @@
 #include "classe.h" // les class declare 
 #include "lesclasses.h"  // ensemble de classe
 #include "instanceclasse.h" // une instance d une classe
+#include "lesinstanceclasses.h" // liste d  instance d une classe
 #include "commande.h"   // une commande
 #include "lescommandes.h" // ensembles de commande 
 #include "espace.h" // un espace de travail 
