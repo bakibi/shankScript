@@ -12,7 +12,7 @@ typedef struct Fonction
     char *nom;//le nom de la fonction
     int nbrParametres;//nom de parametre
     LesVariables *contenuV; //les variable qui sont dans le header
-    struct LesClasses *contenuC;//en parametre classes
+    struct instanceClasse *contenuC;//en parametre classes
     char *contenu;//et le contenu de la fonction
     char *ContenuR; // le contenu que la fonction va retourner
 }Fonction;
