@@ -22,9 +22,13 @@ Variable *new_Variable(int type ,char *nom,char *contenu)
     strcpy(v->nom,nom);
     if(contenu == NULL)//si lecontenu n y est pas
             v->contenu = NULL;
+    else 
+    {
     v->contenu = (char *)malloc(strlen(contenu));
     strcpy(v->contenu,contenu);
+    }
     return v;//le retour de la variable
+    
 }//fin de la fonction
 
 

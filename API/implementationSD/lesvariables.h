@@ -85,7 +85,7 @@ char *LesVariables_contenu(LesVariables *lv,char *nom)
     LesVariables *tmp = lv;//pointeur
     while(tmp)
     {
-        if(Variable_compareNom(tmp->contenu,nom) == 0)
+        if(Variable_compareNom(tmp->contenu,nom) == 1)
             return Variable_valeur(tmp->contenu);//retourner la valeur de la variable
         tmp  = tmp->svt;//suivant
     }//fin while
