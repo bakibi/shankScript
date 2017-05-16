@@ -63,5 +63,51 @@ char *calculerExpressionNv3(char *chaine,char valeur[300])
 
 /*
     Cette fonction permet de calculer en plus de calculerExpressionNv3
-
+    on peut ajouter les parentheses:
+            Entree: 
+                chaine la chaine à traiter
+                valeur le tompont
+            Sortie:
+                la valeur finale
 */
+char *calculerExpressionNv2(char *chaine,char valeur[300])
+{
+    int pile = 0;//la pile
+    int taille = strlen(chaine);//la taille de la chiane à traiter
+    char lecture[500];//la chaine de lecture
+    char c[2] = {' ','\0'};//le cara de lecture
+    char elm_pile[100];//les element de la pile
+
+    strcpy(valeur,"");
+    strcpy(lecture,"");
+    strcpy(elm_pile,"");
+    int e  = 0;//pas encore commencer
+    for(int i=0;i<taille;i++)
+    {
+        c[0] = chaine[i];//lecture
+        if(c[0] == '(')// on incremente la pile
+            pile++;
+        if(c[0] == ')')//on decremente la pile
+            pile--;
+       
+     if(e == 0 && c[0]=='(') // si (  doncon commence à inserer dans la pile
+          {
+                e = 2;
+                strcpy(elm_pile,"");//on vide la pile pour une nvl utilisation
+        }
+        else  if(e==2 && pile!=0)//si on pas encore rencorter )
+        {
+            strcat(elm_pile,c);
+        }
+       else  if(e ==2 && pile == 0)// si la pile est vide
+            {
+                e = 0;
+                strcat(lecture,calculerExpressionNv2(elm_pile,valeur));
+                 strcpy(elm_pile,"");//on vide la pile pour une nvl utilisation
+            }
+        else
+         strcat(lecture,c);
+        
+    }//fin de for
+    return calculerExpressionNv3(lecture,valeur);
+}

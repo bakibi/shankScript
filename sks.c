@@ -7,6 +7,6 @@ int main(int argc,char **args)
     char m[300];
   
    
-    copyToFile("TEST/out",calculerExpressionNv3(chaine,m));//copier le resultat dans le fichier
+    copyToFile("TEST/out",calculerExpressionNv2(chaine,m));//copier le resultat dans le fichier
     return 0;
 }
