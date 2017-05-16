@@ -40,6 +40,7 @@ int LesFonctions_chercher(LesFonctions *lf,char *nom,int nbr);
 #include "mot.h"
 #include "mots.h"
 #include "pile.h" // une pile de type ElementPile
+#include "arbrestr.h"
 #include "variable.h"   //une varialbe
 #include "lesvariables.h" // les variable
 #include "fonction.h" //  une fonction

@@ -34,11 +34,11 @@ Commande *cmd = (Commande *)malloc(sizeof(Commande));
         Sortie:
             la commande bien interpreter
 */
-Commande *Commande_interprete(Commande *cmd,LesVariables *les_variables)
+Commande *Commande_interprete(Commande *cmd,LesVariables *les_variables,LesFonctions *les_fonctions)
 {
     if(cmd == NULL)
         return NULL;//si le cas d'erreur
-   
+        
 
     return cmd;
 }//fin de la fonction

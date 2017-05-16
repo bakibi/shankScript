@@ -6,3 +6,4 @@
 #include "estmotvalide.h"       //cette fonction verifie di un mot est valide
 #include "estmotfonction.h" //cette fonction verifie une chaine si elle a une forme d u,e fonction
 #include "estoperation.h"       // cette fonction verifie si une chaine est une operation ou pas 
+#include "calculexpression.h" // cette fonction permet de calculer une expression de nicveau 3

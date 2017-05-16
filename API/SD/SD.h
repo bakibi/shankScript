@@ -1,4 +1,6 @@
 
+
+#include "arbrestr.h"  // Une implemntation d un arbre de dtype chaine de caractere
 #include "mot.h"        // un mot dans l analyse lexical
 #include "mots.h"       //les mot dans l analyse lexical
 #include "pile.h"           // pile pour verification

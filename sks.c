@@ -4,7 +4,9 @@
 int main(int argc,char **args)
 {
     char *chaine = readFromFile("TEST/test.sks",chaine);//lecture du fichier
-    
-    copyToFile("TEST/out",chaine);//copier le resultat dans le fichier
+    char m[300];
+  
+   
+    copyToFile("TEST/out",calculerExpressionNv3(chaine,m));//copier le resultat dans le fichier
     return 0;
 }
