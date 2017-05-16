@@ -26,6 +26,8 @@ char *calculerExpressionNv3(char *chaine,char valeur[300])
     for(int i =0;i<taille;i++)
     {
         c[0] = chaine[i];//affectation en c
+        if(c[0] == ' ')
+            continue;
         if(estNombre(c) || c[0]=='.')
         {
             if(e ==  1)
@@ -34,7 +36,7 @@ char *calculerExpressionNv3(char *chaine,char valeur[300])
             {
                 a = ArbreStr_ajouter(a,lecture);//on entre la chaine dans l arbre
                 strcpy(lecture,c);//reiniatioalisation
-                e = 2;
+                e = 1;
             }//fin else
         }//fin if est nmobre
         else//si le la car entre est une operation
@@ -49,7 +51,17 @@ char *calculerExpressionNv3(char *chaine,char valeur[300])
             }//fin else
         }//fin else
     }//fin for
+    
+     
      a = ArbreStr_ajouter(a,lecture);//ajout du dernier element 
     strcpy(valeur,ArbreStr_value(a,result));
     return valeur;
 }//fin de la fonction
+
+
+
+
+/*
+    Cette fonction permet de calculer en plus de calculerExpressionNv3
+
+*/

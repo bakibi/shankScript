@@ -26,8 +26,8 @@ int estOperation(char *chaine)
     if(  strcmp(chaine,"%") == 0)    return 5;
 
     if(  strcmp(chaine,"=") == 0)    return 6;
-    if(  strcmp(chaine,"==") == 0)    return 7;
-    if(  strcmp(chaine,"!=") == 0)    return 8;
+    if(  strcmp(chaine,"==") == 0)    return 16;
+    if(  strcmp(chaine,"!=") == 0)    return 17;
     if(  strcmp(chaine,"!") == 0)    return 9;
     if(  strcmp(chaine,"&&") == 0)    return 10;
     if(  strcmp(chaine,"||") == 0)    return 11;

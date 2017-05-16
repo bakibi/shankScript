@@ -72,7 +72,16 @@ ArbreStr *ArbreStr_ajouter(ArbreStr *a,char *e)
             tmp->fg = a;
             return tmp;
         }//fin if
-        tmp->fg = a->fd;
+         if( cat_nd <cat)
+            {
+                tmp->fg = a->fd;
+                 a->fd = tmp;    
+            }
+            else 
+            {
+                tmp->fg = a;
+                return tmp;
+            }
          a->fd = tmp;  
    }//fin else
 
@@ -148,13 +157,13 @@ const char *ArbreStr_value(ArbreStr *a,char valeur[300])
         case 4: sprintf(valeur,"%f",vg/vd);break;
         case 5: sprintf(valeur,"%d",(int)vg%(int)vd);break;
 
-        case 7: sprintf(valeur,"%d",(int)vg==(int)vd);break;
-        case 8: sprintf(valeur,"%d",(int)vg!=(int)vd);break;
+        case 16: sprintf(valeur,"%d",(int)vg==(int)vd);break;
+        case 17: sprintf(valeur,"%d",(int)vg!=(int)vd);break;
 
         case 10: sprintf(valeur,"%d",(int)vg&&(int)vd);break;
-        case 11: sprintf(valeur,"%d",(int)vg||(int)vd);break;
+        case 11: sprintf(valeur,"%d",(int)vg || (int)vd);break;
 
-        case 12: sprintf(valeur,"%d",(int)vg<(int)vd);break;
+        case 12: sprintf(valeur,"%d",(int)vg < (int)vd);break;
         case 13: sprintf(valeur,"%d",(int)vg<=(int)vd);break;
         case 14: sprintf(valeur,"%d",(int)vg>(int)vd);break;
         case 15: sprintf(valeur,"%d",(int)vg>=(int)vd);break;
