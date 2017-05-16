@@ -109,5 +109,61 @@ char *calculerExpressionNv2(char *chaine,char valeur[300])
          strcat(lecture,c);
         
     }//fin de for
-    return calculerExpressionNv3(lecture,valeur);
+    return calculerExpressionNv3(lecture,valeur);//on applique la fct de niv 2 
+}//fin de la fonction
+
+
+
+/*
+    Cette fonction permer de formater une chaine de caracetere
+        Entree:
+            chaine la chaine,
+            valeur le tompon
+        Sortie:
+            la chaine de caractere
+*/
+char *formaterUneChaine(char *chaine,char *valeur)
+{
+    strcpy(valeur,"");
+    int taille = strlen(chaine);
+    char c[2] = {' ','\0'};
+    for(int i=0;i<taille;i++)
+    {
+        c[0] = chaine[i];
+        if(c[0] == '\"' || c[0] == '\n') continue;
+        if(c[0] == '\\')
+        {
+            i++;
+            c[0] = chaine[i];
+            if(c[0] == '\\')
+             strcat(valeur,c);
+            if(c[0] == 'n')
+                strcat(valeur,"\n");
+             if(c[0] == '\"')
+                strcat(valeur,"\"");
+             if(c[0] == 't')
+                strcat(valeur,"\t");
+            continue;
+        }
+         strcat(valeur,c);
+    }//fin for
+    return valeur;
+}//fin de la fonction
+
+
+
+
+
+/*
+    Cette fonction en plus de calculerExpressionNv2 
+        on peut concatener une chiane de caractere et calculer un truc ddans
+            Entree:
+                chaine la chaine à traiter
+                valeur le tampon
+            Sortie:
+                le resultat bien concatene
+*/
+char *calculerExpressionNv1(char *chaine,char *valeur)
+{
+    int taille = strlen(chaine);
 }
