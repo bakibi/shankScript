@@ -1,3 +1,3 @@
 
-
-#include "al.h" // l analuse lexicale
+#include "al.h"// l analyse lexicale
+#include "traduction.h" // la traduction

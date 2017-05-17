@@ -166,4 +166,48 @@ char *formaterUneChaine(char *chaine,char *valeur)
 char *calculerExpressionNv1(char *chaine,char *valeur)
 {
     int taille = strlen(chaine);
-}
+    char lecteur[1000];
+    char result[1000];//ou on va stocker le resultat a chaque fois 
+    strcpy(lecteur,"");//itini 
+    strcpy(result,"");//init
+    char c[2] = {' ','\0'};//le caractere de compa
+    int e = 0;
+    for(int i=0;i<taille;i++)
+    {
+        c[0] = chaine[i] ;//prendre le caracetere
+        if(c[0] == '\"' && e == 0)
+            {
+                e = 1;//en entre dans la chiane de caractere
+                strcat(lecteur,c);//concatenation
+            }
+        else  if(c[0] == '\"' && e == 1)
+            {
+                if(chaine[i-1] != '\\')
+                    {
+                        strcat(lecteur,c);//concatenation
+                        strcpy(valeur,"");
+                        strcat(result,formaterUneChaine(lecteur,valeur));//on concatene la partie due la chaine
+                        strcpy(lecteur,"");// on reiniatioalisation
+                        e = 0;
+                        continue;//passer à l iteration suivante
+                    }//si on on a fini la chaine de carac
+                    strcat(lecteur,c);//sinon on concatenation
+            }
+           else {
+                if(strcmp(c,"+") == 0 && chaine[i+1] == '\"')
+                {
+                    strcat(result,calculerExpressionNv2(lecteur,valeur));
+                    strcpy(lecteur,"");// on reiniatioalisation
+                    continue;
+                }
+                strcat(lecteur,c);//lecture
+                    
+            }//si c est un nombre
+    }//fin for
+   
+    if(e == 0)
+        strcat(result,calculerExpressionNv2(lecteur,valeur));
+
+    strcpy(valeur,result);
+    return valeur;
+}//fin de la fonction
