@@ -3,7 +3,7 @@
 /*
     LA Structure de donnee espaced de travail
 */
-typedef struct Esapce
+typedef struct Espace
 {
     char *nom;//le nom de l'esapce de travail
     char *user;//le nom de l utilisateur
@@ -11,4 +11,4 @@ typedef struct Esapce
     LesVariables *contenuV;//l ensemble de tous les variables
     LesInstanceClasses *contenuC;//l ensemble de classes 
     LesCommande *contenuCmd;//tout les commande saisie et reassi
-} Esapce;
+} Espace;

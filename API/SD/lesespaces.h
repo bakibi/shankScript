@@ -6,6 +6,6 @@
 */
 typedef struct LesEspaces
 {
-    Esapce *contenu; //le conteneu de ce neoud
+    Espace *contenu; //le conteneu de ce neoud
     struct LesEspaces *svt;//   L element suivant ou NULL
 }LesEspaces;
