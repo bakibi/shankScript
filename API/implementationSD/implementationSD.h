@@ -45,4 +45,3 @@ int LesFonctions_chercher(LesFonctions *lf,char *nom,int nbr);
 #include "lesvariables.h" // les variable
 #include "fonction.h" //  une fonction
 #include "lesfonction.h" // liste des fonction 
-#include "commande.h"
