@@ -2,4 +2,4 @@
 
 #include "outils/outils.h"
 #include "implementationSD/implementationSD.h"
-#include "analyses/analyses.h"
+#include "analyse/analyse.h"

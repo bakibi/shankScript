@@ -12,7 +12,7 @@
 int estMotCle(char *chaine)
 {
     // les mots clee disponibles
-    char m[][20] = {"var","str","while","if","else","function","class","for","return","new","include"}; 
+    char m[][20] = {"var","string","while","if","else","function","class","for","return","new","include"}; 
     int taille  = 11;
     for(int i = 0;i<taille;i++)
         if(strcmp(m[i],chaine) == 0)
