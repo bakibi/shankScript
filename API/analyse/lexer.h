@@ -119,7 +119,16 @@ Tokens *Lexer(char *chaine)
                 toks = Tokens_Add(toks,FUNCTION,lexeme);
              else 
                 toks = Tokens_Add(toks,NAME,lexeme);
-
+                strcpy(lexeme,"");
+                strcat(lexeme,c);
+                if(i+1<taille && chaine[i+1] == '=')
+                        {
+                            c[0] = chaine[i++];
+                            strcat(lexeme,c);
+                            toks = Tokens_Add(toks,OPERATOR,lexeme);
+                              strcpy(lexeme,"");
+                                continue;
+                        }
                 toks = Tokens_Add(toks,EQUA,c);
                 strcpy(lexeme,"");
                 continue;
@@ -187,6 +196,45 @@ Tokens *Lexer(char *chaine)
                 strcpy(lexeme,"");
                 continue;
             }
+
+
+            if(c[0] == '<' || c[0] == '>' || c[0] == '|' || c[0] == '&' || c[0] == '!')
+            {
+                   if(strcmp(lexeme,"") == 0)
+                ;//do nothing
+            else if(estType(lexeme))
+                 toks = Tokens_Add(toks,TYPE,lexeme);
+            else if(estNombre(lexeme))
+                toks = Tokens_Add(toks,NUMBER,lexeme);
+            else if(strcmp(lexeme,"if") == 0)
+                toks = Tokens_Add(toks,IF,lexeme);
+             else if(strcmp(lexeme,"elseif") == 0)
+                toks = Tokens_Add(toks,ELSEIF,lexeme);
+             else if(strcmp(lexeme,"else") == 0)
+                toks = Tokens_Add(toks,ELSE,lexeme);
+             else if(strcmp(lexeme,"while") == 0)
+                toks = Tokens_Add(toks,WHILE,lexeme);
+             else if(strcmp(lexeme,"function") == 0)
+                toks = Tokens_Add(toks,FUNCTION,lexeme);
+             else 
+                toks = Tokens_Add(toks,NAME,lexeme);
+                  strcpy(lexeme,"");
+                  strcat(lexeme,c);
+                
+                if(i+1<taille)
+                    if(chaine[i+1] == '=' || chaine[i+1] == '|' || chaine[i+1] == '&')
+                             {   
+                                 i = i+1;
+                                 c[0] = chaine[i];
+                                  strcat(lexeme,c);
+                              }
+                   
+                    toks = Tokens_Add(toks,OPERATOR,lexeme);
+                    strcpy(lexeme,"");
+                    continue;        
+                
+            }//end if
+
             strcat(lexeme,c);
             if(i+1 == taille)
                 {
@@ -209,8 +257,7 @@ Tokens *Lexer(char *chaine)
              else 
                 toks = Tokens_Add(toks,NAME,lexeme);
 
-               
-                }
+                }//fin if
          }//fin for 
 
            
