@@ -184,10 +184,16 @@ Tokens *Lexer(char *chaine)
                while(1 )
                { 
                    i++;
-                   if(i>=taille) break;
+                   if(i>=taille) {
+                       strcat(lexeme,c);
+                       break;
+                   }
                   if(c[0]!='\\' && chaine[i]=='\"')
-                    break;
-                   strcat(lexeme,c);
+                   {
+                        strcat(lexeme,c);
+                        break;
+                   }
+                     strcat(lexeme,c);
                     c[0] = chaine[i];
                    
                }
