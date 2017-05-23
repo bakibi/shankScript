@@ -7,10 +7,24 @@
 
 
 
+
+
+void gerer_declaration(Tokens toks,AllFonction *allf,AllVariable *allv)
+{
+    
+}//fin de la fonction
+
+
+
+
+
+
 /*cette fonction prend les element de Trees et il l evalue */
 char  *Evalutor(Trees *trs)
 {
     Trees  *tmp = trs;
+    AllFonction *allf = NULL;
+    AllVariable *allv = NULL;
     while(tmp)
     {
         
