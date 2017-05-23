@@ -7,6 +7,7 @@ int main(int argc,char **args)
     char m[300];
                    Tokens *toks = Lexer(chaine);     
                    Trees    *trs   = Parser(toks);
+                   char     *evl  =   Evalutor(trs);
     copyToFile("TEST/out",calculerExpressionNv1(chaine,m));//copier le resultat dans le fichier
     return 0;
 }

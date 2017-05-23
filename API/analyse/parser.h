@@ -45,23 +45,24 @@ Trees *Parser(Tokens *toks)
                     break;
                     tmp = tmp->svt;
             }// while
+            
             trs = Trees_Add(trs,DECLVAR,newt);
         }// if tok == type;
 
         /*  Le cas d un affichage*/
-       else if(tmp->this->tok == NUMBER || tmp->this->tok == NAME || tmp->this->tok == OPERATOR || 
-            (tmp->this->tok == OTHER && strcmp(tmp->this->value,"(")==0))
+       else if(tmp->this->tok == NUMBER || tmp->this->tok == NAME || tmp->this->tok == STRING || tmp->this->tok == OPERATOR || 
+            tmp->this->tok == OTHER && strcmp(tmp->this->value,"(")==0)
         {
             Tokens *newt = NULL;
             while(tmp)
-            {
+            {   
                     newt = Tokens_Add(newt,tmp->this->tok,tmp->this->value);
 
                      if(strcmp(tmp->this->value,";") == 0)
                     break;
                     tmp = tmp->svt;
             }// while
-            trs = Trees_Add(trs,DECLVAR,newt);
+            trs = Trees_Add(trs,AFFICHAGE,newt);
         }//fin cas de l affichage
 
 
