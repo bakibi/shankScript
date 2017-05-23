@@ -1,4 +1,9 @@
 
+typedef struct Parametre{
+    char valeur[1000];
+    struct Parametre *svt;
+} Parametre;
+
 typedef struct Fonction {//Sd d une fonction
     int type ;
     char *name;
@@ -7,10 +12,27 @@ typedef struct Fonction {//Sd d une fonction
     char *content;
 } Fonction;
 
+
+
 typedef struct AllFonction{//tout les fonction
     Fonction *fct;
     struct AllFonction *svt;
 }AllFonction;
+
+
+/*ajouter un nouveau parameter*/
+Parametre *Parametre_ajouter(Parametre *p,char *valeur)
+{
+    Parametre *pt = (Parametre *)malloc(sizeof(Parametre));
+    pt->svt = NULL;
+    strcpy(pt->valeur,valeur);
+    if(p == NULL)   return pt;
+    Parametre *tmp = p;
+    while(tmp->svt)
+        tmp = tmp->svt;
+    tmp->svt = pt;
+    return p;
+}
 
 
 /* creation d une nouvelle fonction */
@@ -38,7 +60,7 @@ Fonction *new_Fonction(int type,char *name,AllVariable *allv,char *content)
 
 /* utiliser une fonction */
 
-char *Fonction_utiliser(Fonction *fct,int n,char *mot[n],AllFonction *allf)
+char *Fonction_utiliser(Fonction *fct,int n,Parametre *p,AllFonction *allf)
 {
     return " ";
 }
@@ -66,13 +88,13 @@ AllFonction *AllFonction_add(AllFonction *allf,Fonction *fct)
 
 
 // utilier une fonction
-char *AllFonction_utiliser(AllFonction *allf,char *name,int n,char *mot[n])
+char *AllFonction_utiliser(AllFonction *allf,char *name,int n,Parametre *p)
 {
     AllFonction *tmp = allf;
     while(tmp)
     {
         if(strcmp(tmp->fct->name,name) == 0 && n == tmp->fct->nbr)
-            return Fonction_utiliser(tmp->fct,n,mot,allf);
+            return Fonction_utiliser(tmp->fct,n,p,allf);
         tmp = tmp->svt ;
     }
     return " ";

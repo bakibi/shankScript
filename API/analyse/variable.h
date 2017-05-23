@@ -15,6 +15,9 @@ typedef struct AllVariable{
     struct AllVariable *svt;
 }AllVariable;
 
+
+
+
 /*  Creation d une nouvelle variable */
 Variable *new_Variable(int type,char *nom,char *valeur)
 {
@@ -52,14 +55,14 @@ Variable *Variable_modifier(Variable *v,char *valeur)
 
 /* cette fonction ajoute une varialbe à une liste de varialbe */
 AllVariable *AllVariable_ajouter(AllVariable *allv,Variable *v)
-{
+{ 
     AllVariable *tp = (AllVariable *)malloc(sizeof(AllVariable));
-    tp->v = v;
+    tp->v = new_Variable(v->type,v->nom,v->val->value);
     tp->svt = NULL;
     if(allv == NULL)    return tp;
     AllVariable  *tmp = allv;
     while(tmp->svt)
-    {
+    { 
         if(strcmp(tmp->v->nom,v->nom) == 0)
             return allv;
         tmp = tmp->svt;
@@ -72,7 +75,7 @@ AllVariable *AllVariable_ajouter(AllVariable *allv,Variable *v)
 AllVariable *AllVariable_modifier(AllVariable *allv,char *nom,char *valeur)
 {
      AllVariable  *tmp = allv;
-    while(tmp->svt)
+    while(tmp)
     {
         if(strcmp(tmp->v->nom,nom) == 0)
             {
@@ -89,7 +92,7 @@ AllVariable *AllVariable_modifier(AllVariable *allv,char *nom,char *valeur)
 char *AllVariable_valeur(AllVariable *allv,char *nom)
 {
       AllVariable  *tmp = allv;
-    while(tmp->svt)
+    while(tmp)
     {
         if(strcmp(tmp->v->nom,nom) == 0)
             {
