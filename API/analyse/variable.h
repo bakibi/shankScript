@@ -1,23 +1,13 @@
 
-
-
-//  la sd des Liste Pile File Pile
-typedef struct ListeT{
+typedef struct Val{
     char *value;
-    struct ListeT *svt;
-}ListeT;
-
-typedef struct ValeurVar// Sd d une valeur d une Variable
-{
-    int type;  //(0-->var) (1-->string)(2-->List)(3-->Queue)(4-->Stack)(5-->Fenetre)
-    char *value;
-    ListeT *value1;
-    struct ValeurVar *svt;
-}ValeurVar;
+    struct Val *svt;
+}Val;
 
 typedef struct Variable {
-    char *name;// le nom de la variable
-    ValeurVar *valeur;//la valeur de la varialbe
+    int type ;
+    char *nom;
+    Val *val;
 }Variable;
 
 typedef struct AllVariable{
@@ -25,79 +15,37 @@ typedef struct AllVariable{
     struct AllVariable *svt;
 }AllVariable;
 
-
-
-
-Variable *new_Variable(char *name,int type,char *valeur,ListeT *valeur1)
+/*  Creation d une nouvelle variable */
+Variable *new_Variable(int type,char *nom,char *valeur)
 {
     Variable *v = (Variable *)malloc(sizeof(Variable));
-    v->name = (char *)malloc(strlen(name));
-    strcpy(v->name,name);
-    v->valeur = (ValeurVar *)malloc(sizeof(ValeurVar));
-    v->valeur->type = type;
-    if(valeur == NULL)  {
-        v->valeur->value = (char *)malloc(sizeof(char)*2);
-        strcpy(v->valeur->value,"");
-    }
+    v->type = type;
+    v->nom = (char *)malloc(strlen(nom));
+    strcpy(v->nom,nom);
+   if(valeur == NULL)
+        v->val = NULL;
     else {
-        v->valeur->value =(char *)malloc(strlen(valeur));
-        strcpy(v->valeur->value,valeur);
+         v->val = (Val *)malloc(sizeof(Val));
+     v->val->value = (char *)malloc(strlen(valeur));
+    strcpy(v->val->value,valeur);
+    v->val->svt = NULL;
     }
-    v->valeur->value1 = valeur1;
     return v;
-}// fin focntion de creation d une  nouvelle varialbe
+}//fin de la fonction
 
 
-int Variable_Compare(Variable *v1,Variable *v2)//comparaison de deux variable 
-{   return strcmp(v1->name,v2->name) == 0;}
-
-
-
-char *Variable_valeur(Variable *v,int i)// Avoir la valeur d une varialbe
+/*  Modifier une variable */
+Variable *Variable_modifier(Variable *v,char *valeur)
 {
-    if(v->valeur->type == 1 || v->valeur->type == 2)
-        return v->valeur->value;
-    int j = 0;
-    ListeT *tmp = v->valeur->value1;
-    while(tmp)
+    int taille  = strlen(valeur);
+    if(v->val == NULL)
     {
-        if( i == j)
-            return tmp->value;
-        tmp = tmp->svt;
+            v->val = (Val *)malloc(sizeof(Val));
+            v->val->value = (char *)malloc(strlen(valeur));
+            strcpy(v->val->value,valeur);
     }
-    return "";
-}//eof
 
-
-
-                                                                                /*ALL Varialbe*/
-
-
-AllVariable *AllVariable_add(AllVariable *al ,Variable *v)//ajouter une varialbe a une liste de varialbe 
-{
-    AllVariable *tmp = (AllVariable *)malloc(sizeof(AllVariable));
-    tmp->v = v;
-    tmp->svt = NULL;
-    tmp->svt = al;
-    return tmp;
-}//eof
-
-
-
-Variable *AllVariable_chercher(AllVariable *al,char *nom)
-{
-    AllVariable *tmp = al;
-    Variable *v = new_Variable(nom,-1,NULL,NULL);
-    while(tmp)
-    {
-        if(Variable_Compare(tmp->v,v))
-            return tmp->v;
-        tmp = tmp->svt;
-    }
-    return NULL;
-}//eof
-
-
-
-
-
+    v->val->value = (char *)realloc(v->val->value,taille);
+     strcpy(v->val->value,valeur);
+    return v;
+}//fin de la fonction 

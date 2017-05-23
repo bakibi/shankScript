@@ -27,11 +27,14 @@ char  *Evalutor(Trees *trs)
                         tmp1 = tmp1->svt;
                 }
                 char res[100];
-                printf("--->%s = %s\n",sentence,calculerExpressionNv1(sentence,res));
+                printf("affichage--->%s = %s\n",sentence,calculerExpressionNv1(sentence,res));
         }//fin if
 
-        //cas de declaration
-
+        //cas de declaration d une variable
+         if(tmp->type==DECLVAR)
+         {
+            
+         }//end cas de la declaration
 
         tmp = tmp->svt;//it suivantes
     }//fin while
