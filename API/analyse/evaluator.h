@@ -9,6 +9,7 @@
 
 
 
+
 Env  *gerer_declaration(Tokens *toks,Env *envi)
 {
     int type = -1;
@@ -75,12 +76,13 @@ Env  *gerer_declaration(Tokens *toks,Env *envi)
 
 
 /*cette fonction prend les element de Trees et il l evalue */
-char  *Evalutor(Trees *trs)
+char  *Evalutor(Trees *trs ,Env *envi)
 {
     Trees  *tmp = trs;
-    Env envi;
-    envi.allv = NULL;
-    envi.allf = NULL;
+   
+    
+
+    int etat_condition = 0;
     while(tmp)
     {
         
@@ -91,22 +93,221 @@ char  *Evalutor(Trees *trs)
                 Tokens *tmp1= tmp->toks;
                 if(tmp1->this->tok == NAME && tmp1->svt && tmp1->svt->this->tok == EQUA)
                 {
-                     printf("affecation---> %s \n",calculerExpressionNv0(tmp1->svt->svt,&envi,res));
-                     envi.allv = AllVariable_modifier(envi.allv,tmp1->this->value,calculerExpressionNv0(tmp1->svt->svt,&envi,res));
+                     printf("affecation---> %s \n",calculerExpressionNv0(tmp1->svt->svt,envi,res));
+                     envi->allv = AllVariable_modifier(envi->allv,tmp1->this->value,calculerExpressionNv0(tmp1->svt->svt,envi,res));
                      
                 }
                 else 
-                    printf("affichage---> %s\n",calculerExpressionNv0(tmp->toks,&envi,res));
+                    printf("affichage---> %s\n",calculerExpressionNv0(tmp->toks,envi,res));
         }//fin if
 
         //cas de declaration d une variable
          if(tmp->type==DECLVAR)
          {
-                gerer_declaration(tmp->toks,&envi);
+                gerer_declaration(tmp->toks,envi);
             
          }//end cas de la declaration
+    
+        /*la cas d une condition */
+         if(tmp->type == TIF)
+         { 
+             if(tmp->svt && (tmp->svt->type == TELSE|| tmp->svt->type == TELSEIF) )
+             etat_condition = 1;
+            Tokens *tmp1 = tmp->toks;
+            Tokens *condition = NULL;
+            Tokens *execution = NULL;
+            tmp1 = tmp1->svt;
+            while(tmp1) // lire la dondition 
+            {
+                if(strcmp(tmp1->this->value,")") == 0)
+                  {  condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value); break;}
+                     condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value);
+                tmp1 = tmp1->svt;
+            }
+            tmp1 = tmp1->svt;
+            char res[100]="";
+            strcpy(res,calculerExpressionNv0(condition,envi,res));
+            strcat(res,">=1");
+            strcpy(res,calculerExpressionNv1(res,res));
+            if(strcmp(res,"1") == 0)
+                {   
+                     etat_condition = 0;//ca veut dire que la condtion est executer
+                    if(strcmp(tmp1->this->value,"{") == 0)
+                        {   
+                            tmp1 = tmp1->svt;
+                            while(tmp1)
+                            {
+                                if(strcmp(tmp1->this->value,"}") == 0)
+                                    break;
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                        else 
+                        {
+                             while(tmp1)
+                            {
+                            
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                }
 
-         if(tmp type == )
+         }// fin  if
+
+         /*la cas d une condition */
+         if(tmp->type == TELSEIF)
+         { 
+              if(etat_condition != 0) {
+             if(tmp->svt && (tmp->svt->type == TELSE|| tmp->svt->type == TELSEIF) )
+             etat_condition = 1;
+            Tokens *tmp1 = tmp->toks;
+            Tokens *condition = NULL;
+            Tokens *execution = NULL;
+            tmp1 = tmp1->svt;
+            while(tmp1) // lire la dondition 
+            {
+                if(strcmp(tmp1->this->value,")") == 0)
+                  {  condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value); break;}
+                     condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value);
+                tmp1 = tmp1->svt;
+            }
+            tmp1 = tmp1->svt;
+            char res[100]="";
+            strcpy(res,calculerExpressionNv0(condition,envi,res));
+            strcat(res,">=1");
+            strcpy(res,calculerExpressionNv1(res,res));
+            if(strcmp(res,"1") == 0)
+                {   
+                     etat_condition = 0;//ca veut dire que la condtion est executer
+                    if(strcmp(tmp1->this->value,"{") == 0)
+                        {   
+                            tmp1 = tmp1->svt;
+                            while(tmp1)
+                            {
+                                if(strcmp(tmp1->this->value,"}") == 0)
+                                    break;
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                           Evalutor(trees,envi);
+                        }
+                        else 
+                        {
+                             while(tmp1)
+                            {
+                            
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                }
+              }
+         }//fin elseif
+
+/*la cas d une condition */
+         if(tmp->type == TELSE)
+         { 
+              if(etat_condition != 0) {
+           
+            Tokens *tmp1 = tmp->toks;
+            Tokens *execution = NULL;
+            tmp1 = tmp1->svt;
+                     etat_condition = 0;//ca veut dire que la condtion est executer
+                    if(strcmp(tmp1->this->value,"{") == 0)
+                        {   
+                            tmp1 = tmp1->svt;
+                            while(tmp1)
+                            {
+                                if(strcmp(tmp1->this->value,"}") == 0)
+                                    break;
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                        else 
+                        {
+                             while(tmp1)
+                            {
+                            
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                
+              }
+         }//fin elseif
+         
+
+ /*la cas d une condition */
+         if(tmp->type == BOUCLE)
+         { 
+            
+            Tokens *tmp1 = tmp->toks;
+            Tokens *condition = NULL;
+            Tokens *execution = NULL;
+            tmp1 = tmp1->svt;
+            while(tmp1) // lire la dondition 
+            { 
+                if(strcmp(tmp1->this->value,")") == 0)
+                  {  condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value); break;}
+                     condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value);
+                tmp1 = tmp1->svt;
+            }
+            tmp1 = tmp1->svt;
+            Tokens *reap=tmp1;
+            char res[100]="";
+            strcpy(res,calculerExpressionNv0(condition,envi,res));
+            strcat(res,">=1");
+            strcpy(res,calculerExpressionNv1(res,res));
+            while(strcmp(res,"1") == 0)
+                {    
+                    tmp1 = reap;
+                     etat_condition = 0;//ca veut dire que la condtion est executer
+                    if(strcmp(tmp1->this->value,"{") == 0)
+                        {   
+                            tmp1 = tmp1->svt;
+                            while(tmp1)
+                            {
+                                if(strcmp(tmp1->this->value,"}") == 0)
+                                    break;
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                        else 
+                        {
+                             while(tmp1)
+                            {
+                            
+                                    execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
+                                tmp1 = tmp1->svt;
+                            }
+                            Trees *trees = Parser(execution);
+                            Evalutor(trees,envi);
+                        }
+                        //reprendre la boucle
+                        strcpy(res,"");
+                         strcpy(res,calculerExpressionNv0(condition,envi,res));
+                        strcat(res,">=1");
+                        strcpy(res,calculerExpressionNv1(res,res));
+                }
+
+         }// fin  boucle
 
       
 
