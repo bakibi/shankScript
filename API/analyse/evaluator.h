@@ -66,11 +66,11 @@ Env  *gerer_declaration(Tokens *toks,Env *envi)
 
 
 /*cette fonction prend les element de Trees et il l evalue */
-const char  *Evalutor(Trees *trs ,Env *envi)
+const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
 {
     Trees  *tmp = trs;
    
-    
+    char ab[500];
 
     int etat_condition = 0;
     while(tmp)
@@ -133,7 +133,7 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                 tmp1 = tmp1->svt;
                             }
                             Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                            Evalutor(trees,envi,bakibi);
                         }
                         else 
                         {
@@ -144,7 +144,11 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                 tmp1 = tmp1->svt;
                             }
                             Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                          
+                            strcpy(bakibi,Evalutor(trees,envi,bakibi));
+                          
+                            if(strcmp(bakibi,"") !=0 )
+                                return calculerExpressionNv1(bakibi,bakibi);
                         }
                 }
 
@@ -186,7 +190,7 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                 tmp1 = tmp1->svt;
                             }
                             Trees *trees = Parser(execution);
-                           Evalutor(trees,envi);
+                           Evalutor(trees,envi,bakibi);
                         }
                         else 
                         {
@@ -196,8 +200,12 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
-                            Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                              Trees *trees = Parser(execution);
+                          
+                            strcpy(bakibi,Evalutor(trees,envi,bakibi));
+                          
+                            if(strcmp(bakibi,"") !=0 )
+                                return calculerExpressionNv1(bakibi,bakibi);
                         }
                 }
               }
@@ -223,7 +231,7 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                 tmp1 = tmp1->svt;
                             }
                             Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                            Evalutor(trees,envi,bakibi);
                         }
                         else 
                         {
@@ -233,8 +241,12 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
-                            Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                             Trees *trees = Parser(execution);
+                          
+                            strcpy(bakibi,Evalutor(trees,envi,bakibi));
+                          
+                            if(strcmp(bakibi,"") !=0 )
+                                return calculerExpressionNv1(bakibi,bakibi);
                         }
                 
               }
@@ -277,7 +289,7 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                 tmp1 = tmp1->svt;
                             }
                             Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                            Evalutor(trees,envi,bakibi);
                         }
                         else 
                         {
@@ -287,8 +299,13 @@ const char  *Evalutor(Trees *trs ,Env *envi)
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
+                            // execution du coeur de la boucle 
                             Trees *trees = Parser(execution);
-                            Evalutor(trees,envi);
+                          
+                            strcpy(bakibi,Evalutor(trees,envi,bakibi));
+                          
+                            if(strcmp(bakibi,"") !=0 )
+                                return calculerExpressionNv1(bakibi,bakibi);
                         }
                         //reprendre la boucle
                         strcpy(res,"");
@@ -302,8 +319,8 @@ const char  *Evalutor(Trees *trs ,Env *envi)
       
          else if(tmp->type == TRETURN)
          {
-            char result[200];
-             return calculerExpressionNv0(tmp->toks->svt,envi,result);
+            strcpy(bakibi, calculerExpressionNv0(tmp->toks->svt,envi,bakibi));
+             return (const char *)bakibi;
          }
 
          if(tmp->type == DECFUNCT)
@@ -313,5 +330,5 @@ const char  *Evalutor(Trees *trs ,Env *envi)
 
         tmp = tmp->svt;//it suivantes
     }//fin while
-    return NULL;
+    return "";
 }//fin de la fonction
