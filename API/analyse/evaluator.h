@@ -1,5 +1,10 @@
 
 
+char *Fonction_utiliser(Fonction *fct,int n,Parametre *p,AllFonction *allf,Env *envi,char *bakibi);
+char *AllFonction_utiliser(AllFonction *allf,char *name,int n,Parametre *p,Env *envi,char *bakibi);
+
+
+
 Env  *gerer_declaration(Tokens *toks,Env *envi)
 {
     int type = -1;
@@ -325,7 +330,46 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
 
          if(tmp->type == DECFUNCT)
          {
-             printf("hello wolrd");
+            
+             Tokens *tmp1= tmp->toks;
+             tmp1 = tmp1->svt;
+             char nom_fonction[100] = "";
+             strcpy(nom_fonction,tmp1->this->value);//copier le nom de la fonction 
+             
+             tmp1 = tmp1->svt;// les parametres
+             AllVariable *lv = NULL;
+             int nbr = 0;
+              int type = -1;
+                tmp1 = tmp1->svt;
+             while(strcmp(tmp1->this->value,")")!=0)
+             { 
+                 nbr++;
+                    if(strcmp(tmp1->this->value,",")==0)
+                        tmp1 = tmp1->svt;
+                    if(strcmp(tmp1->this->value,"var") == 0) type = 0;
+                    if(strcmp(tmp1->this->value,"string") == 0) type = 1;
+                     if(strcmp(tmp1->this->value,"List") == 0) type = 2;
+                    if(strcmp(tmp1->this->value,"Queue") == 0) type = 3;
+                    if(strcmp(tmp1->this->value,"Stack") == 0) type = 4;
+                    if(strcmp(tmp1->this->value,"Fenetre") == 0) type = 5;
+                    char name_variable[100];
+                    tmp1 = tmp1->svt;
+                    strcpy(name_variable,tmp1->this->value);
+                    lv = AllVariable_ajouter(lv,new_Variable(type,name_variable,""));
+                 tmp1 = tmp1->svt;
+             }//fin while 
+             tmp1 = tmp1->svt;tmp1 = tmp1->svt;// reading content
+             char content_f[5000] = "";
+             while(strcmp(tmp1->this->value,"}")!=0)
+             {
+                 strcat(content_f,tmp1->this->value);
+                 
+                tmp1 = tmp1->svt;
+             }
+             Fonction *fct = new_Fonction(type,nom_fonction,lv,content_f);
+             envi->allf = AllFonction_add(envi->allf,fct);
+             tmp1 = tmp1->svt;//-->}
+             printf("%s %d-> %s\n",nom_fonction,nbr,content_f);
          }
 
         tmp = tmp->svt;//it suivantes
