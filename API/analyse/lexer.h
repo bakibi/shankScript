@@ -1,7 +1,7 @@
 
 
 enum tokens{TYPE,NAME,NUMBER,STRING,OPERATOR,IF,ELSE,ELSEIF,WHILE,FUNCTION,EQUA,
-                       OTHER};
+                       OTHER,RETURN};
 
 typedef struct Token
 {
@@ -54,6 +54,8 @@ Tokens *Lexer(char *chaine)
         {
             if(strcmp(lexeme,"") == 0)
                 ;//do nothing
+            else if (estMotCle(lexeme) && strcmp(lexeme,"return") == 0)
+                toks = Tokens_Add(toks,RETURN,lexeme);
             else if(estType(lexeme))
                  toks = Tokens_Add(toks,TYPE,lexeme);
             else if(estNombre(lexeme))

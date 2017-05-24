@@ -1,15 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
 Env  *gerer_declaration(Tokens *toks,Env *envi)
 {
     int type = -1;
@@ -76,7 +66,7 @@ Env  *gerer_declaration(Tokens *toks,Env *envi)
 
 
 /*cette fonction prend les element de Trees et il l evalue */
-char  *Evalutor(Trees *trs ,Env *envi)
+const char  *Evalutor(Trees *trs ,Env *envi)
 {
     Trees  *tmp = trs;
    
@@ -310,6 +300,16 @@ char  *Evalutor(Trees *trs ,Env *envi)
          }// fin  boucle
 
       
+         else if(tmp->type == TRETURN)
+         {
+            char result[200];
+             return calculerExpressionNv0(tmp->toks->svt,envi,result);
+         }
+
+         if(tmp->type == DECFUNCT)
+         {
+             printf("hello wolrd");
+         }
 
         tmp = tmp->svt;//it suivantes
     }//fin while

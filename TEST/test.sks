@@ -1,10 +1,5 @@
 
-var x = 0;
 
-while(x <=10)
-{
-    x = x+1;
-   if( x == 9)
-            {"\n\t\tsalut tout le monde je suis le 9 ieme\n";}
-    
-}
+
+var x = 15+15;
+return "1+5";

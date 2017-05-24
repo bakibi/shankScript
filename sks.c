@@ -10,7 +10,7 @@ int main(int argc,char **args)
     envi.allf = NULL;
                    Tokens *toks = Lexer(chaine);     
                    Trees    *trs   = Parser(toks);
-                   char     *evl  =   Evalutor(trs,&envi);
+                   printf("-->((Retour finale)%s)\n",Evalutor(trs,&envi));  
     copyToFile("TEST/out",calculerExpressionNv1(chaine,m));//copier le resultat dans le fichier
     return 0;
 }

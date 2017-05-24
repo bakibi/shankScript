@@ -58,13 +58,6 @@ Fonction *new_Fonction(int type,char *name,AllVariable *allv,char *content)
 
 
 
-/* utiliser une fonction */
-
-char *Fonction_utiliser(Fonction *fct,int n,Parametre *p,AllFonction *allf)
-{
-    return " ";
-}
-
 
 
 /*  Ajouter une fonction*/
@@ -78,25 +71,10 @@ AllFonction *AllFonction_add(AllFonction *allf,Fonction *fct)
     while(tmp)
     {
         if(strcmp(tmp->fct->name,fct->name) == 0 && fct->nbr == tmp->fct->nbr)
-            return allf;
+            return allf;    
         tmp = tmp->svt ;
     }
     tmp->svt = tp;
     return allf;
 }//fin de la fonction 
-
-
-
-// utilier une fonction
-char *AllFonction_utiliser(AllFonction *allf,char *name,int n,Parametre *p)
-{
-    AllFonction *tmp = allf;
-    while(tmp)
-    {
-        if(strcmp(tmp->fct->name,name) == 0 && n == tmp->fct->nbr)
-            return Fonction_utiliser(tmp->fct,n,p,allf);
-        tmp = tmp->svt ;
-    }
-    return " ";
-}//fin de la fonction
 

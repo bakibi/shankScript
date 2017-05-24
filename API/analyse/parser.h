@@ -1,6 +1,6 @@
 
 
-enum tree {DECLVAR , DECFUNCT , AFFICHAGE , AFFECTATION , TIF,TELSEIF,TELSE,BOUCLE,USEFUNC};
+enum tree {DECLVAR , DECFUNCT , AFFICHAGE , AFFECTATION , TIF,TELSEIF,TELSE,BOUCLE,USEFUNC,TRETURN};
 
 
 
@@ -32,6 +32,22 @@ Trees *Parser(Tokens *toks)
 
     while(tmp)//la boucle de lecture
     {
+
+
+         if(tmp->this->tok == RETURN)
+        {
+            Tokens *newt = NULL;
+            while(tmp)
+            {
+                    newt = Tokens_Add(newt,tmp->this->tok,tmp->this->value);
+
+                     if(strcmp(tmp->this->value,";") == 0)
+                    break;
+                    tmp = tmp->svt;
+            }// while
+            
+            trs = Trees_Add(trs,TRETURN,newt);
+        }// if tok == type;
       
       /*    le cas d un declarage d une variable */
         if(tmp->this->tok == TYPE)

@@ -43,7 +43,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                         tmp = tmp->svt;
                     }//fin while
                     p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
-                    strcat(tompon,AllVariable_valeur(envi->allv,AllFonction_utiliser(envi->allf,nomF,nbr,p)));
+                    strcat(tompon,AllVariable_valeur(envi->allv,AllFonction_utiliser(envi->allf,nomF,nbr,p,envi)));
              }//end if function
              else 
                 strcat(tompon,tmp->this->value);
