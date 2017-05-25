@@ -101,6 +101,19 @@ char *methode_Fenetre(Variable *v,char *name,int n,Parametre *p,AllFonction *all
         Fixed_add(c,cpn->this,x,y);
          return " \"la fenetre est maintenant invisible.\" ";
     }
+    else if(strcmp(name,"ajouterLabel") == 0 && n == 3)
+    {
+        if(v->val->fen == NULL)
+            return " \"la fenetre n'est pas encore creer .\" ";
+         char tm[1000]; 
+        Container *c =Fenetre_getContainer(v->val->fen);
+          int x = atoi(calculerExpressionNv1(p->svt->valeur,tm));
+        int  y = atoi(calculerExpressionNv1(p->svt->svt->valeur,tm));
+        Component *cpn = new_Label(calculerExpressionNv1(p->valeur,tm),0,1);
+        Fixed_add(c,cpn->this,x,y);
+         return " \"la fenetre est maintenant invisible.\" ";
+    }
+
 
     return "\"cette fonction n'est pas encore disponible\"";
 }// fin fonction
