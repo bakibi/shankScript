@@ -50,6 +50,7 @@ char *Fonction_utiliser(Fonction *fct,int n,Parametre *p,AllFonction *allf,Env *
 char *AllFonction_utiliser(AllFonction *allf,char *name,int n,Parametre *p,Env *envi,char *bakibi)
 {
     AllFonction *tmp = allf;
+    AllFonction tmp
     while(tmp)
     {
         if(strcmp(tmp->fct->name,name) == 0 && n == tmp->fct->nbr)

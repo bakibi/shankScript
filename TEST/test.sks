@@ -1,8 +1,2 @@
 
 
-function  fonction1(var x,string y)
-{
-   x+y;
-}
-
-fonction1(10,"salut");

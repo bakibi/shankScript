@@ -3,6 +3,17 @@
 
 
 
+
+
+//  transforme chaine en format utf8
+char* utf8(char *chaine)
+{
+    return(g_locale_to_utf8 (chaine,-1,0,0,0));
+}
+#include "SD1/Structures.h"
+#include "SD1/Taille.h" 
+#include "Prototypes.h"
+
 //  Containers
 
 #include "Containers/Container.h"
