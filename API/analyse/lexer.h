@@ -270,12 +270,12 @@ Tokens *Lexer(char *chaine)
 
            
               
-    Tokens *tmp = toks;
+   /* Tokens *tmp = toks;
     while(tmp)
     {
         printf("%s %d\n",tmp->this->value,tmp->this->tok);
         tmp = tmp->svt;
-    }
+    }*/
 
     return toks;
 }//fin de la fonction

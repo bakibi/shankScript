@@ -1,11 +1,8 @@
-function fonction (var y) 
+
+
+function  fonction1(var x,string y)
 {
-  while(y>0)
-  {
-      y = y-1;
-      y;
-  }
-    
+   x+y;
 }
 
-fonction(5);
+fonction1(10,"salut");

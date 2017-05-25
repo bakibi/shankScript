@@ -32,25 +32,39 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                     int nbr = 0;// le nombre de parametere
                     Parametre *p = NULL;// le poiteur des parametetre
                     Tokens *tks = NULL;
-                    while( tmp && strcmp(tmp->this->value,")") !=0)
-                    { printf("here \n");
-                        nbr++;
-                        if(strcmp(tmp->this->value,")") == 0 || strcmp(tmp->this->value,",")==0)
+                    int e = 0;
+                    while( tmp)
+                    {
+                       
+                        if( strcmp(tmp->this->value,",")==0)
                         {
                             p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            free(tks);
                             tks = NULL;
+                           
+                             nbr++;
+                        }
+                        else if(strcmp(tmp->this->value,")") == 0)
+                        {
+                             if(e !=0) nbr++;
+                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            free(tks);
+                            tks = NULL;
+                            tmp = tmp->svt;
+                            break;
                         }
                         else
-                            tks = Tokens_Add(tks,tmp->this->tok,tmp->this->value);
+                            {tks = Tokens_Add(tks,tmp->this->tok,tmp->this->value);}
                         tmp = tmp->svt;
+                        e++;
                   }//fin while
-                    p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                    printf("--->%s %d \n",nomF,nbr);
                     strcat(tompon,AllFonction_utiliser(envi->allf,nomF,nbr,p,envi,tompon));
                     
                     
              }//end if function
              else 
-                {strcat(tompon,tmp->this->value);printf("--->%s \n",tmp->this->value);}
+                {strcat(tompon,tmp->this->value);}
             tmp = tmp->svt; 
     }
 

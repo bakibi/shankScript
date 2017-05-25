@@ -33,7 +33,7 @@ class Unclasse {
 }
 
 
-function str fonction1(str s)
+function  fonction1(str s)
 {
     return s+" hello";
 }

@@ -119,7 +119,7 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
                      condition = Tokens_Add(condition,tmp1->this->tok,tmp1->this->value);
                 tmp1 = tmp1->svt;
             }
-            tmp1 = tmp1->svt;
+            tmp1 = tmp1->svt;// --->{
             char res[100]="";
             strcpy(res,calculerExpressionNv0(condition,envi,res));
             strcat(res,">=1");
@@ -133,7 +133,7 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
                             while(tmp1)
                             {
                                 if(strcmp(tmp1->this->value,"}") == 0)
-                                    break;
+                                   { tmp1 = tmp1->svt;break;}
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
@@ -190,7 +190,7 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
                             while(tmp1)
                             {
                                 if(strcmp(tmp1->this->value,"}") == 0)
-                                    break;
+                                     { tmp1 = tmp1->svt;break;}
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
@@ -231,7 +231,7 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
                             while(tmp1)
                             {
                                 if(strcmp(tmp1->this->value,"}") == 0)
-                                    break;
+                                     { tmp1 = tmp1->svt;break;}
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
@@ -289,7 +289,7 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
                             while(tmp1)
                             {
                                 if(strcmp(tmp1->this->value,"}") == 0)
-                                    break;
+                                     { tmp1 = tmp1->svt;break;}
                                     execution = Tokens_Add(execution,tmp1->this->tok,tmp1->this->value);
                                 tmp1 = tmp1->svt;
                             }
@@ -360,8 +360,13 @@ const char  *Evalutor(Trees *trs ,Env *envi,char  *bakibi)
              }//fin while 
              tmp1 = tmp1->svt;tmp1 = tmp1->svt;// reading content
              char content_f[5000] = "";
-             while(strcmp(tmp1->this->value,"}")!=0)
+             int pile = 0;
+             while(!(strcmp(tmp1->this->value,"}")==0 && pile ==0) )
              {
+                 if(strcmp(tmp1->this->value,"{")==0)
+                    pile ++;
+                if(strcmp(tmp1->this->value,"}")==0)
+                    pile --;
                  strcat(content_f,tmp1->this->value);
                  
                 tmp1 = tmp1->svt;

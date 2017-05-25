@@ -22,14 +22,17 @@ typedef struct AllFonction{//tout les fonction
 
 /*ajouter un nouveau parameter*/
 Parametre *Parametre_ajouter(Parametre *p,char *valeur)
-{
+{  
     Parametre *pt = (Parametre *)malloc(sizeof(Parametre));
-    pt->svt = NULL;
-    strcpy(pt->valeur,valeur);
+            pt->svt = NULL;
+         if(estNombre(valeur))
+            strcpy(pt->valeur,valeur);
+        else 
+        sprintf(pt->valeur,"\"%s\"",valeur);
     if(p == NULL)   return pt;
     Parametre *tmp = p;
     while(tmp->svt)
-        tmp = tmp->svt;
+        {tmp = tmp->svt;}
     tmp->svt = pt;
     return p;
 }
