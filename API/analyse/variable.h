@@ -1,6 +1,7 @@
 
 typedef struct Val{
     char *value;
+    Fenetre *fen;
     struct Val *svt;
 }Val;
 
@@ -25,12 +26,21 @@ Variable *new_Variable(int type,char *nom,char *valeur)
     v->type = type;
     v->nom = (char *)malloc(strlen(nom));
     strcpy(v->nom,nom);
-   if(valeur == NULL)
+   if(valeur == NULL && type   != 5)
         v->val = NULL;
+    else if (valeur == NULL)
+    {
+         v->val = (Val *)malloc(sizeof(Val));
+     v->val->value = (char *)malloc(strlen(valeur));
+    strcpy(v->val->value,"");
+    v->val->fen = NULL;
+    v->val->svt = NULL;
+    }
     else {
          v->val = (Val *)malloc(sizeof(Val));
      v->val->value = (char *)malloc(strlen(valeur));
     strcpy(v->val->value,valeur);
+    v->val->fen = NULL;
     v->val->svt = NULL;
     }
     return v;
@@ -103,7 +113,25 @@ char *AllVariable_valeur(AllVariable *allv,char *nom)
     }
 
     return "";
-}
+}// fin de la donction
+
+
+Variable *AllVariable_trouve(AllVariable *allv,char *nom)
+{
+       AllVariable  *tmp = allv;
+    while(tmp)
+    {
+        if(strcmp(tmp->v->nom,nom) == 0)
+            {
+                if(tmp->v->val == NULL) break;
+                else return tmp->v;
+            }
+        tmp = tmp->svt;
+    }
+     return NULL;
+}//fin 
+
+
 
 
 

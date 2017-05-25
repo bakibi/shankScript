@@ -1,2 +1,5 @@
-
+Fenetre fen;
+Fenetre fen1;
+fen.creer_fenetre("fenetre ",100,400);
+fen1.creer_fenetre("fenetre 1",100,100);
 

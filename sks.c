@@ -3,6 +3,7 @@
 
 int main(int argc,char **args)
 {
+    gtk_init(&argc,&args);
     char *chaine = readFromFile("TEST/test.sks",chaine);//lecture du fichier
     char m[300];
     Env envi;
@@ -11,6 +12,7 @@ int main(int argc,char **args)
                    Tokens *toks = Lexer(chaine);     
                    Trees    *trs   = Parser(toks);
                    printf("-->((Retour finale)%s)\n",Evalutor(trs,&envi,m));  
-    copyToFile("TEST/out",calculerExpressionNv1(chaine,m));//copier le resultat dans le fichier
+    copyToFile("TEST/out",calculerExpressionNv1(chaine,m));//copier le resultat dans le fichier$
+    gtk_main();
     return 0;
 }

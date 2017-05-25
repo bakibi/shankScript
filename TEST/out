@@ -1,1 +1,1 @@
-var x=1;while(x<10) {    reda0
+Fenetre fen;Fenetre fen1;fen.creer_fenetre(fenetre ,100,400);fen1.creer_fenetre(fenetre 10

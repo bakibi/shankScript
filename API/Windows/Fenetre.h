@@ -36,7 +36,8 @@ Fenetre *new_Fenetre(const char *titre,int type,Taille *t,int position)
     else 
         f->this = gtk_window_new(GTK_WINDOW_POPUP);
         
-    Container *c = new_Box(VERTICAL,0,FALSE);
+    //Container *c = new_Box(VERTICAL,0,FALSE);
+    Container *c = new_Fixed();
     f = Fenetre_setContainer(f,c);
     f = Fenetre_setTaille(f,t);
     f = Fenetre_setTitre(f,titre);
