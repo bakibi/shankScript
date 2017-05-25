@@ -4,7 +4,6 @@
 
 
 
-
 //  transforme chaine en format utf8
 char* utf8(char *chaine)
 {

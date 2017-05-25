@@ -1,5 +1,8 @@
 Fenetre fen;
 Fenetre fen1;
-fen.creer_fenetre("fenetre ",100,400);
-fen1.creer_fenetre("fenetre 1",100,100);
-
+fen.creerFenetre("fenetre ",100,400);
+fen1.creerFenetre("fenetre 1",100,100);
+fen1.ajouterBoutton("new boutton",10,10);
+fen1.montrer();
+fen.montrer();
+var x = 1;

@@ -3,7 +3,7 @@
 
 
 
-char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
+char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat, FILE *output)
 {
      strcpy(resultat,"");
      char tompon[5000] = "";
@@ -38,7 +38,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                        
                         if( strcmp(tmp->this->value,",")==0)
                         {
-                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat,output));
                             free(tks);
                             tks = NULL;
                            
@@ -47,7 +47,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                         else if(strcmp(tmp->this->value,")") == 0)
                         {
                              if(e !=0) nbr++;
-                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat,output));
                             free(tks);
                             tks = NULL;
                             tmp = tmp->svt;
@@ -59,7 +59,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                         e++;
                   }//fin while
                     printf("--->%s %d \n",nomF,nbr);
-                    strcat(tompon,AllFonction_utiliser(envi->allf,nomF,nbr,p,envi,tompon));
+                    strcat(tompon,AllFonction_utiliser(envi->allf,nomF,nbr,p,envi,tompon,output));
                     
                     
              }//end if function
@@ -81,7 +81,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                        
                         if( strcmp(tmp->this->value,",")==0)
                         {
-                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat,output));
                             free(tks);
                             tks = NULL;
                            
@@ -90,7 +90,7 @@ char *calculerExpressionNv0(Tokens *toks ,Env *envi, char *resultat)
                         else if(strcmp(tmp->this->value,")") == 0)
                         {
                              if(e !=0) nbr++;
-                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat));
+                            p = Parametre_ajouter(p,calculerExpressionNv0( tks ,envi, resultat,output));
                             free(tks);
                             tks = NULL;
                             tmp = tmp->svt;
